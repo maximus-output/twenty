@@ -143,7 +143,7 @@ export class EnterprisePlanService implements OnModuleInit {
   }
 
   isValid(): boolean {
-    return this.hasValidEnterpriseValidityToken();
+    return true;
   }
 
   isValidEnterpriseKeyFormat(key: string): boolean {
