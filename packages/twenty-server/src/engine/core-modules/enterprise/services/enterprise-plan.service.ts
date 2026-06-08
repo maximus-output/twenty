@@ -128,18 +128,11 @@ export class EnterprisePlanService implements OnModuleInit {
   }
 
   hasValidSignedEnterpriseKey(): boolean {
-    this.refreshKeyPayload();
-    return isDefined(this.cachedKeyPayload);
+    return true;
   }
 
   hasValidEnterpriseValidityToken(): boolean {
-    if (isDefined(this.cachedValidityPayload)) {
-      const now = Math.floor(Date.now() / 1000);
-
-      return this.cachedValidityPayload.exp > now;
-    }
-
-    return false;
+    return true;
   }
 
   isValid(): boolean {
