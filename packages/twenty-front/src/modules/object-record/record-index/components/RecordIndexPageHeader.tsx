@@ -1,4 +1,5 @@
 import { RecordIndexCommandMenu } from '@/command-menu-item/components/RecordIndexCommandMenu';
+import { SidePanelToggleButton } from '@/side-panel/components/SidePanelToggleButton';
 import { MAIN_CONTEXT_STORE_INSTANCE_ID } from '@/context-store/constants/MainContextStoreInstanceId';
 import { contextStoreCurrentViewIdComponentState } from '@/context-store/states/contextStoreCurrentViewIdComponentState';
 import { contextStoreNumberOfSelectedRecordsComponentState } from '@/context-store/states/contextStoreNumberOfSelectedRecordsComponentState';
@@ -6,8 +7,7 @@ import { isLayoutCustomizationModeEnabledState } from '@/layout-customization/st
 import { useFilteredObjectMetadataItems } from '@/object-metadata/hooks/useFilteredObjectMetadataItems';
 import { RecordIndexPageHeaderIcon } from '@/object-record/record-index/components/RecordIndexPageHeaderIcon';
 import { useRecordIndexContextOrThrow } from '@/object-record/record-index/contexts/RecordIndexContext';
-import { SidePanelToggleButton } from '@/side-panel/components/SidePanelToggleButton';
-import { PageCardHeader } from '@/ui/layout/page/components/PageCardHeader';
+import { PageHeader } from '@/ui/layout/page/components/PageHeader';
 import { useAtomComponentStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 import { styled } from '@linaria/react';
@@ -68,19 +68,18 @@ export const RecordIndexPageHeader = () => {
   );
 
   return (
-    <PageCardHeader
-      icon={
-        <RecordIndexPageHeaderIcon objectMetadataItem={objectMetadataItem} />
-      }
+    <PageHeader
       title={pageHeaderTitle}
-      actionButton={
-        isDefined(contextStoreCurrentViewId) ? (
-          <>
-            <RecordIndexCommandMenu />
-            {!isLayoutCustomizationModeEnabled && <SidePanelToggleButton />}
-          </>
-        ) : undefined
-      }
-    />
+      Icon={() => (
+        <RecordIndexPageHeaderIcon objectMetadataItem={objectMetadataItem} />
+      )}
+    >
+      {isDefined(contextStoreCurrentViewId) && (
+        <>
+          <RecordIndexCommandMenu />
+          {!isLayoutCustomizationModeEnabled && <SidePanelToggleButton />}
+        </>
+      )}
+    </PageHeader>
   );
 };
