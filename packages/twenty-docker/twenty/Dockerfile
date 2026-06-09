@@ -71,6 +71,10 @@ COPY ./packages/twenty-sdk /app/packages/twenty-sdk
 COPY ./packages/twenty-client-sdk /app/packages/twenty-client-sdk
 RUN npx nx run twenty-front:lingui:extract && \
     npx nx run twenty-front:lingui:compile
+# Build UI packages explicitly before the frontend so their dist/ directories
+# (style.css, theme-dark.css, theme-light.css) exist when Vite resolves imports.
+# twenty-ui-deprecated has no pre-built dist/ in git after the package rename.
+RUN npx nx build twenty-ui-deprecated && npx nx build twenty-ui
 # To skip the memory-intensive frontend build, pre-build on the host:
 #   npx nx build twenty-front
 # The check below will use packages/twenty-front/build/ if it already exists.

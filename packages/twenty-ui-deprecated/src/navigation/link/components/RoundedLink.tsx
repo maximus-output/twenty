@@ -20,7 +20,6 @@ const StyledLink = styled.a`
   display: inline-flex;
   font-weight: ${themeCssVariables.font.size.md};
   gap: ${themeCssVariables.spacing[1]};
-  height: 10px;
   justify-content: center;
   max-width: calc(100% - ${themeCssVariables.spacingMultiplicator} * 2px);
   min-width: fit-content;
